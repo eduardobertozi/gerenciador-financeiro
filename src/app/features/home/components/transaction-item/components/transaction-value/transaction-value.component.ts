@@ -11,7 +11,7 @@ const CssClasses = {
 @Component({
   selector: 'app-transaction-value',
   imports: [CurrencyPipe],
-  styleUrl: './transaction-value.scss',
+  styleUrl: './transaction-value.component.scss',
   host: {
     '[class]': 'cssClass()',
   },
@@ -19,7 +19,7 @@ const CssClasses = {
     {{ transaction().value | currency: 'BRL' }}
   `,
 })
-export class TransactionValue {
+export class TransactionValueComponent {
   transaction = input.required<Transaction>();
   cssClass = computed(() => CssClasses[this.transaction().type]);
 }

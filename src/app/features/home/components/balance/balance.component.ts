@@ -1,14 +1,14 @@
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { Component, computed, input } from '@angular/core';
-import { BalanceCard } from './components/balance-card/balance-card';
+import { BalanceCardComponent } from './components/balance-card/balance-card.component';
 
 @Component({
   selector: 'app-balance',
-  imports: [BalanceCard],
-  templateUrl: './balance.html',
-  styleUrl: './balance.scss',
+  imports: [BalanceCardComponent],
+  templateUrl: './balance.component.html',
+  styleUrl: './balance.component.scss',
 })
-export class Balance {
+export class BalanceComponent {
   transactions = input.required<Transaction[]>();
 
   totalIncomes = computed(() => {

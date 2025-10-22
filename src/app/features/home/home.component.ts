@@ -1,17 +1,21 @@
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Balance } from './components/balance/balance';
-import { NoTransactions } from './components/no-transactions/no-transactions';
-import { TransactionItem } from './components/transaction-item/transaction-item';
+import { BalanceComponent } from './components/balance/balance.component';
+import { NoTransactionsComponent } from './components/no-transactions/no-transactions.component';
+import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
 
 @Component({
   selector: 'app-home',
-  imports: [Balance, TransactionItem, NoTransactions],
-  templateUrl: './home.html',
-  styleUrl: './home.scss',
+  imports: [
+    BalanceComponent,
+    TransactionItemComponent,
+    NoTransactionsComponent,
+  ],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
 })
-export class Home implements OnInit {
+export class HomeComponent implements OnInit {
   private transactionService = inject(TransactionsService);
   transactions = signal<Transaction[]>([]);
 
