@@ -2,4 +2,6 @@
 
 @for (transaction of transactions(); track transaction) {
   <app-transaction-item [transaction]="transaction"></app-transaction-item>
+} @empty {
+  <app-no-transactions />
 }
