@@ -1,8 +1,8 @@
-import { Routes } from "@angular/router";
+import { Routes } from '@angular/router';
 
-export default <Routes>[
+export default [
   {
     path: '',
-    loadComponent: () => import('./home').then((m) => m.Home)
-  }
-]
+    loadComponent: () => import('./home').then((m) => m.Home),
+  },
+] as Routes;

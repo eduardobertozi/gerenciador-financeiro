@@ -6,7 +6,7 @@ import { Layout } from './core/layout/layout';
   selector: 'app-root',
   imports: [RouterOutlet, Layout],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
   protected readonly title = signal('gerenciador-financeiro');
