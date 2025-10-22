@@ -1,4 +1,5 @@
 import { TransactionType } from '@/app/shared/transaction/enums/transaction-type';
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormControl,
@@ -10,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
   selector: 'app-create',
@@ -19,6 +21,8 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatButtonModule,
     MatButtonToggleModule,
+    NgxMaskDirective,
+    JsonPipe,
   ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.scss',
@@ -31,7 +35,7 @@ export class CreateComponent {
     title: new FormControl<string>('', {
       validators: [Validators.required],
     }),
-    value: new FormControl<number>(0, {
+    value: new FormControl<number | null>(null, {
       validators: [Validators.required],
     }),
   });
