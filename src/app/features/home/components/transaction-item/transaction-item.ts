@@ -1,12 +1,12 @@
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
-import { CurrencyPipe } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { TransactionValue } from './components/transaction-value/transaction-value';
 
 @Component({
   selector: 'app-transaction-item',
-  imports: [MatCardModule, MatButtonModule, CurrencyPipe],
+  imports: [MatCardModule, MatButtonModule, TransactionValue],
   templateUrl: './transaction-item.html',
   styleUrl: './transaction-item.scss',
 })
