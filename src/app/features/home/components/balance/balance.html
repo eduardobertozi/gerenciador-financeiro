@@ -2,19 +2,19 @@
   class="card"
   [type]="'outcome'"
   [label]="'Gastos'"
-  [value]="300"
+  [value]="totalOutcomes()"
 ></app-balance-card>
 
 <app-balance-card
   class="card"
   [type]="'balance'"
   [label]="'Saldo'"
-  [value]="-100"
+  [value]="balance()"
 ></app-balance-card>
 
 <app-balance-card
   class="card"
   [type]="'income'"
   [label]="'Ganhos'"
-  [value]="200"
+  [value]="totalIncomes()"
 ></app-balance-card>
