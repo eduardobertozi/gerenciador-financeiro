@@ -2,7 +2,7 @@ import { Component, computed, input, Signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 
 type CardType = 'income' | 'outcome' | 'balance';
-type ValueCssClasses = 'income' | 'outcome';
+type ValueCssClasses = 'income' | 'outcome' | 'zero';
 
 @Component({
   selector: 'app-balance-card',
@@ -22,6 +22,10 @@ export class BalanceCard {
 
     if (this.type() === 'outcome') {
       return 'outcome';
+    }
+
+    if (this.value() === 0) {
+      return 'zero';
     }
 
     return this.value() > 0 ? 'income' : 'outcome';
