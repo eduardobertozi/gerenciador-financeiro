@@ -1,0 +1,22 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "title": "Venda na Hotmart",
+      "value": 75,
+      "type": "income"
+    },
+    {
+      "id": 2,
+      "title": "Trabalho Freelance",
+      "value": 100,
+      "type": "income"
+    },
+    {
+      "id": 3,
+      "title": "Gasolina",
+      "value": 100,
+      "type": "outcome"
+    }
+  ]
+}
