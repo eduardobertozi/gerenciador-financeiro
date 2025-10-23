@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { NgxMaskDirective } from 'ngx-mask';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-create',
@@ -71,34 +72,24 @@ export class CreateOrEditComponent {
       value: this.form().value.value as number,
     };
 
+    this.createOrEdit(payload).subscribe({
+      next: () => this.router.navigate(['/']),
+    });
+  }
+
+  private createOrEdit(payload: TransactionPayload) {
     if (this.isEdit()) {
-      return this.updateTransaction(payload);
+      return this.transactionService
+        .put(this.transaction()!.id, payload)
+        .pipe(
+          tap(() => this.feedback.success('Transação atualizada com sucesso!')),
+        );
+    } else {
+      return this.transactionService
+        .post(payload)
+        .pipe(
+          tap(() => this.feedback.success('Transação criada com sucesso!')),
+        );
     }
-
-    this.createTransaction(payload);
-  }
-
-  private createTransaction(payload: TransactionPayload) {
-    this.transactionService.post(payload).subscribe({
-      next: () => {
-        this.feedback.success('Transação criada com sucesso!');
-        this.router.navigate(['/']);
-      },
-    });
-  }
-
-  private updateTransaction(payload: TransactionPayload) {
-    const id = this.transaction()?.id ?? null;
-
-    if (!id) {
-      return;
-    }
-
-    this.transactionService.put(id, payload).subscribe({
-      next: () => {
-        this.feedback.success('Transação atualizada com sucesso!');
-        this.router.navigate(['/']);
-      },
-    });
   }
 }

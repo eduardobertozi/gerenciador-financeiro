@@ -79,10 +79,16 @@
       "id": 13
     },
     {
-      "title": "Recebi dinheiro emprestado",
+      "title": "Recebi valor emprestado",
       "type": "income",
       "value": 50,
       "id": 14
+    },
+    {
+      "title": "nova",
+      "type": "outcome",
+      "value": 10,
+      "id": 15
     }
   ]
 }
