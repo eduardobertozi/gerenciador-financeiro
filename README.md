@@ -1,59 +1,75 @@
-# GerenciadorFinanceiro
+# Gerenciador Financeiro
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+Uma aplicação de gestão financeira pessoal desenvolvida em Angular 20, criada para estudar e aplicar os recursos mais modernos do framework.
 
-## Development server
+## 📚 Sobre o Projeto
 
-To start a local development server, run:
+Este projeto está sendo utilizado como ferramenta de aprendizado para explorar o **Angular moderno versão 20** e seus recursos mais recentes, incluindo:
 
+- Componentes standalone
+- Nova estrutura de roteamento
+- Angular Material 20
+- Reactive Forms
+- TypeScript moderno
+- ESLint + Prettier para qualidade de código
+
+## 🚀 Funcionalidades
+
+- ✅ Cadastro de transações financeiras
+- ✅ Visualização de saldo atual
+- ✅ Listagem de transações
+- ✅ Interface responsiva com Angular Material
+
+## 🛠️ Tecnologias
+
+- **Angular 20** - Framework principal
+- **Angular Material 20** - Biblioteca de componentes UI
+- **TypeScript** - Linguagem de programação
+- **RxJS** - Programação reativa
+- **JSON Server** - Mock API para desenvolvimento
+
+## 📋 Pré-requisitos
+
+- Node.js (versão 18 ou superior)
+- npm ou yarn
+
+## 🔧 Instalação e Uso
+
+1. Clone o repositório:
 ```bash
-ng serve
+git clone <url-do-repositorio>
+cd gerenciador-financeiro
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+2. Instale as dependências:
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+3. Execute a aplicação:
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+A aplicação estará disponível em `http://localhost:4200` e a API mock em `http://localhost:3000`.
 
-To build the project run:
+## 📝 Scripts Disponíveis
 
-```bash
-ng build
-```
+- `npm start` - Inicia a aplicação e o servidor JSON
+- `npm run build` - Gera o build de produção
+- `npm test` - Executa os testes
+- `npm run lint` - Executa a análise de código
+- `npm run format` - Formata o código
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📖 Aprendizado
 
-## Running unit tests
+Este projeto serve como laboratório para experimentar com:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- Arquitetura moderna do Angular
+- Melhores práticas de desenvolvimento
+- Padrões de organização de código
+- Ferramentas de desenvolvimento modernas
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Nota**: Este é um projeto educacional focado no aprendizado do Angular 20 e suas funcionalidades mais recentes.
