@@ -34,9 +34,9 @@
       placeholder="Digite o valor da transação"
       [formControlName]="'value'"
       mask="separator.2"
+      prefix="R$&nbsp;"
       required
     />
-    <span matTextPrefix>R$&nbsp;</span>
 
     @if (form().controls.value.hasError('required')) {
       <mat-error>Campo obrigatório</mat-error>
