@@ -17,6 +17,30 @@
       "title": "Gasolina",
       "value": 100,
       "type": "outcome"
+    },
+    {
+      "title": "Compra teste",
+      "type": "outcome",
+      "value": 119.9,
+      "id": 4
+    },
+    {
+      "title": "Vale gás",
+      "type": "income",
+      "value": 100,
+      "id": 5
+    },
+    {
+      "title": "Salário",
+      "type": "income",
+      "value": 2500,
+      "id": 6
+    },
+    {
+      "title": "Pagamento do cartão",
+      "type": "outcome",
+      "value": 900,
+      "id": 7
     }
   ]
 }
