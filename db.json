@@ -41,6 +41,30 @@
       "type": "outcome",
       "value": 900,
       "id": 7
+    },
+    {
+      "title": "Comprei uma coxinha",
+      "type": "income",
+      "value": 7,
+      "id": 8
+    },
+    {
+      "title": "Comprei uma coxinha",
+      "type": "outcome",
+      "value": 14,
+      "id": 9
+    },
+    {
+      "title": "Ganhei um pix",
+      "type": "income",
+      "value": 100,
+      "id": 10
+    },
+    {
+      "title": "Comprei um curso",
+      "type": "outcome",
+      "value": 800,
+      "id": 11
     }
   ]
 }

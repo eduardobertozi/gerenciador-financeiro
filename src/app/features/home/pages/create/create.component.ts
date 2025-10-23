@@ -37,7 +37,9 @@ export class CreateComponent {
   protected readonly transactionType = TransactionType;
 
   form = new FormGroup({
-    type: new FormControl<TransactionType>(TransactionType.INCOME),
+    type: new FormControl<string>('', {
+      validators: [Validators.required],
+    }),
     title: new FormControl<string>('', {
       validators: [Validators.required],
     }),
@@ -52,9 +54,9 @@ export class CreateComponent {
     }
 
     const payload: TransactionPayload = {
-      title: this.form.value.title!,
-      type: this.form.value.type!,
-      value: this.form.value.value!,
+      title: this.form.value.title as string,
+      type: this.form.value.type as TransactionType,
+      value: this.form.value.value as number,
     };
 
     this.transactionService.post(payload).subscribe({
@@ -62,6 +64,8 @@ export class CreateComponent {
         this.snackBar.open('Transação criada com sucesso!', 'Fechar', {
           verticalPosition: 'top',
           horizontalPosition: 'center',
+          panelClass: ['snack-bar-success-feedback'],
+          duration: 2500,
         });
 
         this.router.navigate(['/']);
