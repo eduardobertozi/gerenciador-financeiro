@@ -4,7 +4,8 @@
 :root {
   .snack-bar-success-feedback {
     @include mat.snack-bar-overrides((
-      button-color: var(--color-on-success),
+      supporting-text-color: var(--mat-sys-on-surface),
+      button-color: var(--mat-sys-on-surface),
       container-color: var(--color-success),
     ));
   }
