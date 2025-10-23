@@ -26,4 +26,11 @@ export class TransactionsService {
       payload,
     );
   }
+
+  put(id: number, payload: TransactionPayload) {
+    return this.httpClient.put<Transaction>(
+      `http://localhost:3000/transactions/${id}`,
+      payload,
+    );
+  }
 }

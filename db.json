@@ -44,12 +44,12 @@
     },
     {
       "title": "Comprei uma coxinha",
-      "type": "income",
+      "type": "outcome",
       "value": 7,
       "id": 8
     },
     {
-      "title": "Comprei uma coxinha",
+      "title": "Comprei uma coca 2l",
       "type": "outcome",
       "value": 14,
       "id": 9

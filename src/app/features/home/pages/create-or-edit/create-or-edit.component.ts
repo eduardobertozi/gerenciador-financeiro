@@ -1,6 +1,9 @@
 import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
 import { TransactionType } from '@/app/shared/transaction/enums/transaction-type';
-import { TransactionPayload } from '@/app/shared/transaction/interfaces/transaction';
+import {
+  Transaction,
+  TransactionPayload,
+} from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
 import { Component, inject } from '@angular/core';
 import {
@@ -13,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
@@ -26,24 +29,33 @@ import { NgxMaskDirective } from 'ngx-mask';
     MatButtonToggleModule,
     NgxMaskDirective,
   ],
-  templateUrl: './create.component.html',
-  styleUrl: './create.component.scss',
+  templateUrl: './create-or-edit.component.html',
+  styleUrl: './create-or-edit.component.scss',
 })
-export class CreateComponent {
+export class CreateOrEditComponent {
+  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly transactionService = inject(TransactionsService);
-  private feedback = inject(FeedbackService);
-  private router = inject(Router);
+  private readonly feedback = inject(FeedbackService);
+  private readonly router = inject(Router);
 
   protected readonly transactionType = TransactionType;
 
+  get transaction(): Transaction | null {
+    return this.activatedRoute.snapshot.data['transaction'] ?? null;
+  }
+
+  get isEdit(): boolean {
+    return Boolean(this.transaction);
+  }
+
   form = new FormGroup({
-    type: new FormControl<string>('', {
+    type: new FormControl<string>(this.transaction?.type ?? '', {
       validators: [Validators.required],
     }),
-    title: new FormControl<string>('', {
+    title: new FormControl<string>(this.transaction?.title ?? '', {
       validators: [Validators.required],
     }),
-    value: new FormControl<number | null>(null, {
+    value: new FormControl<number | null>(this.transaction?.value ?? null, {
       validators: [Validators.required],
     }),
   });
@@ -59,9 +71,30 @@ export class CreateComponent {
       value: this.form.value.value as number,
     };
 
+    if (this.isEdit) {
+      return this.updateTransaction(payload);
+    }
+
+    this.createTransaction(payload);
+  }
+
+  private createTransaction(payload: TransactionPayload) {
     this.transactionService.post(payload).subscribe({
       next: () => {
         this.feedback.success('Transação criada com sucesso!');
+        this.router.navigate(['/']);
+      },
+    });
+  }
+
+  private updateTransaction(payload: TransactionPayload) {
+    if (!this.transaction) {
+      return;
+    }
+
+    this.transactionService.put(this.transaction.id, payload).subscribe({
+      next: () => {
+        this.feedback.success('Transação atualizada com sucesso!');
         this.router.navigate(['/']);
       },
     });
