@@ -1,3 +1,4 @@
+import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
 import { TransactionType } from '@/app/shared/transaction/enums/transaction-type';
 import { TransactionPayload } from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
@@ -12,7 +13,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgxMaskDirective } from 'ngx-mask';
 
@@ -31,8 +31,8 @@ import { NgxMaskDirective } from 'ngx-mask';
 })
 export class CreateComponent {
   private readonly transactionService = inject(TransactionsService);
+  private feedback = inject(FeedbackService);
   private router = inject(Router);
-  private snackBar = inject(MatSnackBar);
 
   protected readonly transactionType = TransactionType;
 
@@ -61,10 +61,7 @@ export class CreateComponent {
 
     this.transactionService.post(payload).subscribe({
       next: () => {
-        this.snackBar.open('Transação criada com sucesso!', 'Fechar', {
-          panelClass: ['snack-bar-success-feedback'],
-        });
-
+        this.feedback.success('Transação criada com sucesso!');
         this.router.navigate(['/']);
       },
     });

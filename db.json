@@ -77,6 +77,12 @@
       "type": "outcome",
       "value": 20,
       "id": 13
+    },
+    {
+      "title": "Recebi dinheiro emprestado",
+      "type": "income",
+      "value": 50,
+      "id": 14
     }
   ]
 }
