@@ -5,7 +5,7 @@ import {
   TransactionPayload,
 } from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgxMaskDirective } from 'ngx-mask';
 
 @Component({
@@ -33,45 +33,45 @@ import { NgxMaskDirective } from 'ngx-mask';
   styleUrl: './create-or-edit.component.scss',
 })
 export class CreateOrEditComponent {
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly transactionService = inject(TransactionsService);
   private readonly feedback = inject(FeedbackService);
   private readonly router = inject(Router);
 
+  protected transaction = input<Transaction | null>(null);
   protected readonly transactionType = TransactionType;
 
-  get transaction(): Transaction | null {
-    return this.activatedRoute.snapshot.data['transaction'] ?? null;
-  }
+  isEdit = computed(() => Boolean(this.transaction()));
 
-  get isEdit(): boolean {
-    return Boolean(this.transaction);
-  }
-
-  form = new FormGroup({
-    type: new FormControl<string>(this.transaction?.type ?? '', {
-      validators: [Validators.required],
-    }),
-    title: new FormControl<string>(this.transaction?.title ?? '', {
-      validators: [Validators.required],
-    }),
-    value: new FormControl<number | null>(this.transaction?.value ?? null, {
-      validators: [Validators.required],
-    }),
-  });
+  form = computed(
+    () =>
+      new FormGroup({
+        type: new FormControl<string>(this.transaction()?.type ?? '', {
+          validators: [Validators.required],
+        }),
+        title: new FormControl<string>(this.transaction()?.title ?? '', {
+          validators: [Validators.required],
+        }),
+        value: new FormControl<number | null>(
+          this.transaction()?.value ?? null,
+          {
+            validators: [Validators.required],
+          },
+        ),
+      }),
+  );
 
   submit() {
-    if (this.form.invalid) {
+    if (this.form().invalid) {
       return;
     }
 
     const payload: TransactionPayload = {
-      title: this.form.value.title as string,
-      type: this.form.value.type as TransactionType,
-      value: this.form.value.value as number,
+      title: this.form().value.title as string,
+      type: this.form().value.type as TransactionType,
+      value: this.form().value.value as number,
     };
 
-    if (this.isEdit) {
+    if (this.isEdit()) {
       return this.updateTransaction(payload);
     }
 
@@ -88,11 +88,13 @@ export class CreateOrEditComponent {
   }
 
   private updateTransaction(payload: TransactionPayload) {
-    if (!this.transaction) {
+    const id = this.transaction()?.id ?? null;
+
+    if (!id) {
       return;
     }
 
-    this.transactionService.put(this.transaction.id, payload).subscribe({
+    this.transactionService.put(id, payload).subscribe({
       next: () => {
         this.feedback.success('Transação atualizada com sucesso!');
         this.router.navigate(['/']);
