@@ -1,34 +1,16 @@
 {
   "transactions": [
     {
-      "id": 2,
-      "title": "Trabalho Freelance",
-      "value": 100,
-      "type": "income"
+      "title": "Salário",
+      "type": "income",
+      "value": 3000,
+      "id": 2
     },
     {
       "id": 3,
       "title": "Gasolina",
       "value": 100,
       "type": "outcome"
-    },
-    {
-      "title": "Compra teste",
-      "type": "outcome",
-      "value": 119.9,
-      "id": 4
-    },
-    {
-      "title": "Vale gás",
-      "type": "income",
-      "value": 100,
-      "id": 5
-    },
-    {
-      "title": "Salário",
-      "type": "income",
-      "value": 2500,
-      "id": 6
     },
     {
       "title": "Pagamento do cartão",
@@ -41,12 +23,6 @@
       "type": "outcome",
       "value": 7,
       "id": 8
-    },
-    {
-      "title": "Ganhei um pix",
-      "type": "income",
-      "value": 100,
-      "id": 10
     },
     {
       "title": "Comprei um curso",

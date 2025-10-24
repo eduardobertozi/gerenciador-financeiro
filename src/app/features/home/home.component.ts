@@ -45,8 +45,6 @@ export class HomeComponent implements OnInit {
       .open({
         title: 'Remover Transação',
         message: 'Tem certeza que deseja remover esta transação?',
-        confirmButtonText: 'Sim',
-        cancelButtonText: 'Não',
       })
       .subscribe({
         next: () => {
