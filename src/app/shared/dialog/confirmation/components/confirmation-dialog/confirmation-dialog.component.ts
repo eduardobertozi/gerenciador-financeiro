@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
@@ -25,5 +31,17 @@ import { DialogData } from '../../interfaces/dialog-data';
 })
 export class ConfirmationDialogComponent {
   readonly dialogRef = inject(MatDialogRef<ConfirmationDialogComponent>);
-  readonly dialogData = inject<DialogData>(MAT_DIALOG_DATA);
+  readonly dialogData = signal<DialogData>(inject<DialogData>(MAT_DIALOG_DATA));
+
+  private defaultDialogData: Partial<DialogData> = {
+    confirmButtonText: 'Sim',
+    cancelButtonText: 'Não',
+  };
+
+  mergeDialogData = computed(() => {
+    return {
+      ...this.defaultDialogData,
+      ...this.dialogData(),
+    };
+  });
 }
