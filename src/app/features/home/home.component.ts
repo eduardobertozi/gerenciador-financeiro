@@ -8,15 +8,17 @@ import { Router, RouterLink } from '@angular/router';
 import { BalanceComponent } from './components/balance/balance.component';
 import { NoTransactionsComponent } from './components/no-transactions/no-transactions.component';
 import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
+import { TransactionsContainerComponent } from './components/transactions-container/transactions-container.component';
 
 @Component({
   selector: 'app-home',
   imports: [
     BalanceComponent,
+    TransactionsContainerComponent,
     TransactionItemComponent,
-    NoTransactionsComponent,
     MatButtonModule,
     RouterLink,
+    NoTransactionsComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
