@@ -1,9 +1,13 @@
 import { Routes } from '@angular/router';
 import { getTransactionByIdResolver } from './pages/create-or-edit/resolvers/get-transaction-by-id-resolver';
+import { getTransactionsResolver } from './pages/list/resolvers/get-transactions-resolver';
 
 export default [
   {
     path: '',
+    resolve: {
+      transactions: getTransactionsResolver,
+    },
     loadComponent: () =>
       import('./pages/list/list.component').then((m) => m.ListComponent),
   },

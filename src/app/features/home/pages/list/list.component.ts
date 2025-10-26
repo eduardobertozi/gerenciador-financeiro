@@ -2,7 +2,7 @@ import { ConfirmationDialogService } from '@/app/shared/dialog/confirmation/serv
 import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, input, linkedSignal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
 import { BalanceComponent } from './components/balance/balance.component';
@@ -23,7 +23,7 @@ import { TransactionsContainerComponent } from './components/transactions-contai
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
   private readonly transactionService = inject(TransactionsService);
   private readonly feedbackService = inject(FeedbackService);
   private readonly confirmationDialogService = inject(
@@ -32,11 +32,8 @@ export class ListComponent implements OnInit {
 
   private readonly router = inject(Router);
 
-  protected transactions = signal<Transaction[]>([]);
-
-  ngOnInit(): void {
-    this.getTransactions();
-  }
+  transactions = input<Transaction[]>([]);
+  items = linkedSignal(() => this.transactions());
 
   edit(transaction: Transaction) {
     this.router.navigate(['edit', transaction.id]);
@@ -59,17 +56,9 @@ export class ListComponent implements OnInit {
   private removeTransaction(transaction: Transaction) {
     this.transactionService.delete(transaction.id).subscribe({
       next: () =>
-        this.transactions.update((transactions) => {
+        this.items.update((transactions) => {
           return transactions.filter((item) => item.id !== transaction.id);
         }),
-    });
-  }
-
-  private getTransactions() {
-    this.transactionService.getAll().subscribe({
-      next: (transactions) => {
-        this.transactions.set(transactions);
-      },
     });
   }
 }
