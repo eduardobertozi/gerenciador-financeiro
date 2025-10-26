@@ -11,7 +11,7 @@ import { TransactionItemComponent } from './components/transaction-item/transact
 import { TransactionsContainerComponent } from './components/transactions-container/transactions-container.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-list',
   imports: [
     BalanceComponent,
     TransactionsContainerComponent,
@@ -20,10 +20,10 @@ import { TransactionsContainerComponent } from './components/transactions-contai
     RouterLink,
     NoTransactionsComponent,
   ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  templateUrl: './list.component.html',
+  styleUrl: './list.component.scss',
 })
-export class HomeComponent implements OnInit {
+export class ListComponent implements OnInit {
   private readonly transactionService = inject(TransactionsService);
   private readonly feedbackService = inject(FeedbackService);
   private readonly confirmationDialogService = inject(

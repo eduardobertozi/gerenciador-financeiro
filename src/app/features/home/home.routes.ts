@@ -5,7 +5,7 @@ export default [
   {
     path: '',
     loadComponent: () =>
-      import('./home.component').then((m) => m.HomeComponent),
+      import('./pages/list/list.component').then((m) => m.ListComponent),
   },
   {
     path: 'create',
