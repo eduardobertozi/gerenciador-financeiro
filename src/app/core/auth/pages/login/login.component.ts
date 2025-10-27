@@ -10,7 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { AuthTokenResponse } from '../../interfaces/auth-token-response';
 import { UserCredentials } from '../../interfaces/user-credentials';
+import { AuthTokenStorageService } from '../../services/auth-token-storage.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -27,6 +29,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   authService = inject(AuthService);
   router = inject(Router);
+  authTokenStorageService = inject(AuthTokenStorageService);
 
   form = new FormGroup({
     user: new FormControl('', Validators.required),
@@ -44,8 +47,9 @@ export class LoginComponent {
     };
 
     this.authService.login(payload).subscribe({
-      next: () => {
+      next: (response: AuthTokenResponse) => {
         this.router.navigate(['']);
+        this.authTokenStorageService.set(response.token);
       },
       error: (response: HttpErrorResponse) => {
         if (response.status === 401) {
