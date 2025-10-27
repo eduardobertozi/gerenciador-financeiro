@@ -14,6 +14,7 @@ import { AuthTokenResponse } from '../../interfaces/auth-token-response';
 import { UserCredentials } from '../../interfaces/user-credentials';
 import { AuthTokenStorageService } from '../../services/auth-token-storage.service';
 import { AuthService } from '../../services/auth.service';
+import { LoggedInUserStoreService } from '../../stores/logged-in-user-store.service';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,7 @@ export class LoginComponent {
   authService = inject(AuthService);
   router = inject(Router);
   authTokenStorageService = inject(AuthTokenStorageService);
+  loggedInUserStoreService = inject(LoggedInUserStoreService);
 
   form = new FormGroup({
     user: new FormControl('', Validators.required),
@@ -50,7 +52,8 @@ export class LoginComponent {
       next: (response: AuthTokenResponse) => {
         this.authTokenStorageService.set(response.token);
         this.authService.getCurrentUser(response.token).subscribe({
-          next: () => {
+          next: (user) => {
+            this.loggedInUserStoreService.setUser(user);
             this.router.navigate(['']);
           },
         });
