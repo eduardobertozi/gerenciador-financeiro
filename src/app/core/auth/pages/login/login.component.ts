@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { AuthTokenResponse } from '../../interfaces/auth-token-response';
+import { switchMap, tap } from 'rxjs';
 import { UserCredentials } from '../../interfaces/user-credentials';
 import { AuthTokenStorageService } from '../../services/auth-token-storage.service';
 import { AuthService } from '../../services/auth.service';
@@ -48,23 +48,24 @@ export class LoginComponent {
       password: this.form.value.password!,
     };
 
-    this.authService.login(payload).subscribe({
-      next: (response: AuthTokenResponse) => {
-        this.authTokenStorageService.set(response.token);
-        this.authService.getCurrentUser(response.token).subscribe({
-          next: (user) => {
-            this.loggedInUserStoreService.setUser(user);
-            this.router.navigate(['']);
-          },
-        });
-      },
-      error: (response: HttpErrorResponse) => {
-        if (response.status === 401) {
-          this.form.setErrors({
-            wrongCredentials: true,
-          });
-        }
-      },
-    });
+    this.authService
+      .login(payload)
+      .pipe(
+        tap((res) => this.authTokenStorageService.set(res.token)),
+        switchMap((res) => this.authService.getCurrentUser(res.token)),
+        tap((user) => this.loggedInUserStoreService.setUser(user)),
+      )
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (res: HttpErrorResponse) => {
+          if (res.status === 401) {
+            this.form.setErrors({
+              wrongCredentials: true,
+            });
+          }
+        },
+      });
   }
 }
