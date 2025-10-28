@@ -5,6 +5,17 @@ import { AuthTokenResponse } from '../interfaces/auth-token-response';
 import { User } from '../interfaces/user';
 import { UserCredentials } from '../interfaces/user-credentials';
 
+function generateToken(): string {
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  let result = '';
+  for (let i = 0; i < 20; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -12,7 +23,7 @@ export class AuthService {
   login(payload: UserCredentials): Observable<AuthTokenResponse> {
     // Simulação de uma chamada HTTP para autenticação.
     if (payload.user === 'admin' && payload.password === '123') {
-      return of({ token: 'fake-token' });
+      return of({ token: generateToken() });
     }
 
     return throwError(
@@ -31,5 +42,11 @@ export class AuthService {
     return of({
       username: 'admin',
     });
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  refreshToken(token: string): Observable<AuthTokenResponse> {
+    // Aqui seria feita a chamada para o endpoint de refresh token.
+    return of({ token: generateToken() });
   }
 }

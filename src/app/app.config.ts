@@ -12,6 +12,7 @@ import {
 } from '@angular/material/snack-bar';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { routes } from './app.routes';
+import { provideLoggedInUser } from './core/auth/initializers/provide-logged-in-user';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,5 +32,6 @@ export const appConfig: ApplicationConfig = {
         verticalPosition: 'top',
       } as MatSnackBarConfig,
     },
+    provideLoggedInUser(),
   ],
 };
