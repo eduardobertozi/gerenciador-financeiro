@@ -10,11 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { switchMap, tap } from 'rxjs';
+import { LoginFacadeService } from '../../facades/login-facade.service';
 import { UserCredentials } from '../../interfaces/user-credentials';
-import { AuthTokenStorageService } from '../../services/auth-token-storage.service';
-import { AuthService } from '../../services/auth.service';
-import { LoggedInUserStoreService } from '../../stores/logged-in-user-store.service';
 
 @Component({
   selector: 'app-login',
@@ -28,10 +25,8 @@ import { LoggedInUserStoreService } from '../../stores/logged-in-user-store.serv
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  authService = inject(AuthService);
-  router = inject(Router);
-  authTokenStorageService = inject(AuthTokenStorageService);
-  loggedInUserStoreService = inject(LoggedInUserStoreService);
+  private readonly router = inject(Router);
+  private readonly loginFacadeService = inject(LoginFacadeService);
 
   form = new FormGroup({
     user: new FormControl('', Validators.required),
@@ -44,28 +39,21 @@ export class LoginComponent {
     }
 
     const payload: UserCredentials = {
-      user: this.form.value.user!,
-      password: this.form.value.password!,
+      user: this.form.value.user as string,
+      password: this.form.value.password as string,
     };
 
-    this.authService
-      .login(payload)
-      .pipe(
-        tap((res) => this.authTokenStorageService.set(res.token)),
-        switchMap((res) => this.authService.getCurrentUser(res.token)),
-        tap((user) => this.loggedInUserStoreService.setUser(user)),
-      )
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/']);
-        },
-        error: (res: HttpErrorResponse) => {
-          if (res.status === 401) {
-            this.form.setErrors({
-              wrongCredentials: true,
-            });
-          }
-        },
-      });
+    this.loginFacadeService.login(payload).subscribe({
+      next: () => {
+        this.router.navigate(['/']);
+      },
+      error: (res: HttpErrorResponse) => {
+        if (res.status === 401) {
+          this.form.setErrors({
+            wrongCredentials: true,
+          });
+        }
+      },
+    });
   }
 }
