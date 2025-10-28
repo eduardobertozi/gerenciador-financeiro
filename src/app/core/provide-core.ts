@@ -1,0 +1,28 @@
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { makeEnvironmentProviders } from '@angular/core';
+import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarConfig,
+} from '@angular/material/snack-bar';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
+import { setAuthTokenInterceptor } from './auth/interceptors/set-auth-token-interceptor';
+import { provideAuth } from './auth/provide-auth';
+
+export function provideCore() {
+  return makeEnvironmentProviders([
+    provideHttpClient(withInterceptors([setAuthTokenInterceptor])),
+    provideEnvironmentNgxMask({
+      thousandSeparator: '.',
+      decimalMarker: ',',
+    }),
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      } as MatSnackBarConfig,
+    },
+    provideAuth(),
+  ]);
+}
