@@ -35,6 +35,12 @@ export class AuthService {
     );
   }
 
+  logout(): Observable<void> {
+    // Aqui seria feita a chamada para o endpoint de logout.
+
+    return of(undefined);
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getCurrentUser(_token: string): Observable<User> {
     // Aqui seria feita a decodificação do token e uma requisição para obter os dados do usuário.
