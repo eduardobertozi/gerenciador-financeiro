@@ -1,5 +1,6 @@
 import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
 import { FullWidthDirective } from '@/app/shared/material/form-field/directives/full-width.directive';
+import { MarginBottomDirective } from '@/app/shared/material/form-field/directives/margin-bottom.directive';
 import { TransactionType } from '@/app/shared/transaction/enums/transaction-type';
 import {
   Transaction,
@@ -31,6 +32,7 @@ import { tap } from 'rxjs';
     MatButtonToggleModule,
     NgxMaskDirective,
     FullWidthDirective,
+    MarginBottomDirective,
   ],
   templateUrl: './create-or-edit.component.html',
   styleUrl: './create-or-edit.component.scss',
