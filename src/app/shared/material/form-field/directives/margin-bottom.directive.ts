@@ -1,4 +1,5 @@
 import {
+  computed,
   Directive,
   effect,
   ElementRef,
@@ -14,22 +15,19 @@ export class MarginBottomDirective {
   private readonly elementRef = inject(ElementRef);
   private readonly renderer2 = inject(Renderer2);
 
-  /**
-   * set margin bottom value in pixels ex: 24px
-   * default is 24px
-   */
   marginBottom = input('', {
     alias: 'appMarginBottom',
-    transform: (value: string) => value || '24px',
   });
+
+  resolvedMarginBottom = computed(() => this.marginBottom() || '24px');
 
   constructor() {
     effect(() => {
-      if (this.marginBottom()) {
+      if (this.resolvedMarginBottom()) {
         this.renderer2.setStyle(
           this.elementRef.nativeElement,
           'margin-bottom',
-          this.marginBottom(),
+          this.resolvedMarginBottom(),
         );
       }
     });
