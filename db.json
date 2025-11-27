@@ -19,12 +19,6 @@
       "id": 7
     },
     {
-      "title": "Comprei uma coxinha",
-      "type": "outcome",
-      "value": 7,
-      "id": 8
-    },
-    {
       "title": "Vale",
       "type": "income",
       "value": 300,
