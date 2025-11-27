@@ -16,7 +16,7 @@ const CssClasses = {
     '[class]': 'cssClass()',
   },
   template: `
-    {{ transaction().value | currency: 'BRL' }}
+    {{ transaction().value | currency }}
   `,
 })
 export class TransactionValueComponent {
