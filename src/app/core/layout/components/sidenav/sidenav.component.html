@@ -1,8 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     class="sidenav"
-    opened
-    mode="side"
+    [opened]="isSidenavOpened()"
+    [mode]="sidenavMode()"
   >
     <app-sidenav-items />
   </mat-sidenav>
