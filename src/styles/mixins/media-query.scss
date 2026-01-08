@@ -1,0 +1,15 @@
+@use 'sass:map';
+
+$breakponts: (
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+  'xxl': 1536px,
+);
+
+@mixin media-query($size) {
+  @media screen and (min-width: map.get($breakponts, $size)) {
+    @content;
+  }
+}
