@@ -1,3 +1,5 @@
+@use 'mixins/media-query.scss' as mq;
+
 .transactions {
   display: grid;
   gap: 12px;
@@ -6,6 +8,10 @@
 
 .actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin: 24px 0;
+
+  @include mq.media-query(sm) {
+    justify-content: flex-end;
+  }
 }
