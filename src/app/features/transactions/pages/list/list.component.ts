@@ -2,10 +2,10 @@ import { ConfirmationDialogService } from '@/app/shared/dialog/confirmation/serv
 import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
-import { Component, inject, resource, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 import { NoTransactionsComponent } from './components/no-transactions/no-transactions.component';
 import { SearchComponent } from './components/search/search.component';
 import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
@@ -36,14 +36,14 @@ export class ListComponent {
 
   searchTerm = signal<string>('');
 
-  resourceRef = resource({
+  resourceRef = rxResource({
     params: () => {
       return {
         searchTerm: this.searchTerm(),
       };
     },
-    loader: ({ params }) => {
-      return firstValueFrom(this.transactionService.getAll(params.searchTerm));
+    stream: ({ params }) => {
+      return this.transactionService.getAll(params.searchTerm);
     },
     defaultValue: [],
   });
@@ -69,8 +69,6 @@ export class ListComponent {
   }
 
   private removeTransaction(transaction: Transaction) {
-    this.resourceRef.update((transactions) =>
-      transactions.filter((item) => item.id !== transaction.id),
-    );
+    this.resourceRef.update((transactions) => transactions.filter((item) => item.id !== transaction.id));
   }
 }

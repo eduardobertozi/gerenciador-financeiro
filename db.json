@@ -23,6 +23,12 @@
       "type": "income",
       "value": 300,
       "id": 9
+    },
+    {
+      "title": "Novo",
+      "type": "outcome",
+      "value": 20,
+      "id": 10
     }
   ]
 }
