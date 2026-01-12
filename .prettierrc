@@ -1,5 +1,5 @@
 {
-  "printWidth": 100,
+  "printWidth": 120,
   "tabWidth": 2,
   "useTabs": false,
   "singleQuote": true,
@@ -15,7 +15,7 @@
       "files": "*.html",
       "options": {
         "parser": "angular",
-        "printWidth": 80,
+        "printWidth": 120,
         "singleAttributePerLine": true
       }
     }

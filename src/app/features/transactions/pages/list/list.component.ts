@@ -2,9 +2,10 @@ import { ConfirmationDialogService } from '@/app/shared/dialog/confirmation/serv
 import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
-import { Component, inject, input, linkedSignal, signal } from '@angular/core';
+import { Component, inject, resource, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { NoTransactionsComponent } from './components/no-transactions/no-transactions.component';
 import { SearchComponent } from './components/search/search.component';
 import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
@@ -28,14 +29,24 @@ export class ListComponent {
   private readonly feedbackService = inject(FeedbackService);
   private readonly confirmationDialogService = inject(ConfirmationDialogService);
   private readonly activatedRoute = inject(ActivatedRoute);
-
   private readonly router = inject(Router);
 
-  transactions = input<Transaction[]>([]);
-
-  items = linkedSignal(() => this.transactions());
+  // transactions = input<Transaction[]>([]);
+  // items = linkedSignal(() => this.transactions());
 
   searchTerm = signal<string>('');
+
+  resourceRef = resource({
+    params: () => {
+      return {
+        searchTerm: this.searchTerm(),
+      };
+    },
+    loader: ({ params }) => {
+      return firstValueFrom(this.transactionService.getAll(params.searchTerm));
+    },
+    defaultValue: [],
+  });
 
   edit(transaction: Transaction) {
     this.router.navigate(['edit', transaction.id], {
@@ -58,11 +69,8 @@ export class ListComponent {
   }
 
   private removeTransaction(transaction: Transaction) {
-    this.transactionService.delete(transaction.id).subscribe({
-      next: () =>
-        this.items.update((transactions) => {
-          return transactions.filter((item) => item.id !== transaction.id);
-        }),
-    });
+    this.resourceRef.update((transactions) =>
+      transactions.filter((item) => item.id !== transaction.id),
+    );
   }
 }
