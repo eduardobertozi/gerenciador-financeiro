@@ -1,7 +1,7 @@
 <mat-card class="card">
   <div>
     <ng-container *isIncome="transaction().type; else elseTemplate">
-      <mat-chip>Ganho</mat-chip>
+      <mat-chip class="card-chip">Ganho</mat-chip>
     </ng-container>
 
     <!-- ## sem sugar syntax <ng-template
@@ -12,7 +12,7 @@
     </ng-template> -->
 
     <ng-template #elseTemplate>
-      <mat-chip>Gasto</mat-chip>
+      <mat-chip class="card-chip">Gasto</mat-chip>
     </ng-template>
 
     <div class="card-title">
@@ -22,6 +22,7 @@
       <app-transaction-value [transaction]="transaction()" />
     </div>
   </div>
+
   <div class="card-actions">
     <button
       matButton="outlined"
