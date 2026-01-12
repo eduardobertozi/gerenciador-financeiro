@@ -6,6 +6,7 @@ import { Component, inject, input, linkedSignal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NoTransactionsComponent } from './components/no-transactions/no-transactions.component';
+import { SearchComponent } from './components/search/search.component';
 import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
 import { TransactionsContainerComponent } from './components/transactions-container/transactions-container.component';
 
@@ -17,6 +18,7 @@ import { TransactionsContainerComponent } from './components/transactions-contai
     MatButtonModule,
     RouterLink,
     NoTransactionsComponent,
+    SearchComponent,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
