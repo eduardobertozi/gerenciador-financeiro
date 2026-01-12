@@ -3,7 +3,6 @@ import { FeedbackService } from '@/app/shared/feedback/services/feedback.service
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
 import { Component, inject, signal } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NoTransactionsComponent } from './components/no-transactions/no-transactions.component';
@@ -31,22 +30,9 @@ export class ListComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
-  // transactions = input<Transaction[]>([]);
-  // items = linkedSignal(() => this.transactions());
-
   searchTerm = signal<string>('');
 
-  resourceRef = rxResource({
-    params: () => {
-      return {
-        searchTerm: this.searchTerm(),
-      };
-    },
-    stream: ({ params }) => {
-      return this.transactionService.getAll(params.searchTerm);
-    },
-    defaultValue: [],
-  });
+  resourceRef = this.transactionService.getAllWithHttpResource(this.searchTerm);
 
   edit(transaction: Transaction) {
     this.router.navigate(['edit', transaction.id], {

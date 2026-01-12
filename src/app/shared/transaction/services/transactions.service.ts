@@ -1,5 +1,5 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpParams, httpResource, HttpResourceRequest } from '@angular/common/http';
+import { inject, Injectable, Signal } from '@angular/core';
 import { Transaction, TransactionPayload } from '../interfaces/transaction';
 
 @Injectable({
@@ -8,14 +8,28 @@ import { Transaction, TransactionPayload } from '../interfaces/transaction';
 export class TransactionsService {
   private httpClient = inject(HttpClient);
 
-  getAll(searchTerm?: string) {
-    let httpParams = new HttpParams();
+  getAll() {
+    return this.httpClient.get<Transaction[]>('/api/transactions');
+  }
 
-    if (searchTerm) {
-      httpParams = httpParams.append('q', searchTerm);
-    }
+  getAllWithHttpResource(searchTerm: Signal<string>) {
+    return httpResource<Transaction[]>(
+      () => {
+        let httpParams = new HttpParams();
 
-    return this.httpClient.get<Transaction[]>('/api/transactions', { params: httpParams });
+        if (searchTerm) {
+          httpParams = httpParams.append('q', searchTerm());
+        }
+
+        return {
+          url: '/api/transactions',
+          params: httpParams,
+        } as HttpResourceRequest;
+      },
+      {
+        defaultValue: [],
+      },
+    );
   }
 
   getById(id: string) {
