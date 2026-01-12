@@ -1,0 +1,40 @@
+@use 'mixins/media-query.scss' as mq;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 18px;
+  gap: 24px;
+
+  @include mq.media-query(sm) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .card-chip {
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 8px;
+  }
+
+  .card-value {
+    font-size: 16px;
+    margin-top: 8px;
+    margin-left: 8px;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 8px;
+
+    @include mq.media-query(sm) {
+      justify-content: flex-end;
+      margin-left: auto;
+    }
+  }
+}

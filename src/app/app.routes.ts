@@ -12,6 +12,11 @@ export const routes: Routes = [
         path: '',
         loadChildren: () => import('./features/home/home.routes'),
       },
+      {
+        path: 'transactions',
+        loadChildren: () =>
+          import('./features/transactions/transactions.routes'),
+      },
     ],
   },
   {
