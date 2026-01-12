@@ -2,13 +2,20 @@ import { ConfirmationDialogService } from '@/app/shared/dialog/confirmation/serv
 import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, Signal, signal } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { debounceTime } from 'rxjs';
 import { NoTransactionsComponent } from './components/no-transactions/no-transactions.component';
 import { SearchComponent } from './components/search/search.component';
 import { TransactionItemComponent } from './components/transaction-item/transaction-item.component';
 import { TransactionsContainerComponent } from './components/transactions-container/transactions-container.component';
+
+function typeDelay(signal: Signal<string>) {
+  const observable = toObservable(signal).pipe(debounceTime(500));
+  return toSignal(observable, { initialValue: '' });
+}
 
 @Component({
   selector: 'app-list',
@@ -32,7 +39,7 @@ export class ListComponent {
 
   searchTerm = signal<string>('');
 
-  resourceRef = this.transactionService.getAllWithHttpResource(this.searchTerm);
+  resourceRef = this.transactionService.getAllWithHttpResource(typeDelay(this.searchTerm));
 
   edit(transaction: Transaction) {
     this.router.navigate(['edit', transaction.id], {
