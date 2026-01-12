@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { ListComponent } from './pages/list/list.component';
-import { getTransactionsResolver } from './pages/list/resolvers/get-transactions-resolver';
+import { HomeComponent } from './home.component';
+import { getTransactionsResolver } from './resolvers/get-transactions-resolver';
 
 export default [
   {
     path: '',
-    component: ListComponent,
+    component: HomeComponent,
     resolve: {
       transactions: getTransactionsResolver,
     },
