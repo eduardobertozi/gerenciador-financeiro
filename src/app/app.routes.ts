@@ -14,8 +14,7 @@ export const routes: Routes = [
       },
       {
         path: 'transactions',
-        loadChildren: () =>
-          import('./features/transactions/transactions.routes'),
+        loadChildren: () => import('./features/transactions/transactions.routes'),
       },
     ],
   },

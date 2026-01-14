@@ -1,4 +1,9 @@
-import { HttpClient, HttpParams, httpResource, HttpResourceRequest } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpParams,
+  httpResource,
+  HttpResourceRequest,
+} from '@angular/common/http';
 import { inject, Injectable, Signal } from '@angular/core';
 import { Transaction, TransactionPayload } from '../interfaces/transaction';
 

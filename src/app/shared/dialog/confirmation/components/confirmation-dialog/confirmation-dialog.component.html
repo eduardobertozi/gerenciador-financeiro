@@ -3,6 +3,10 @@
   {{ mergeDialogData().message }}
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button matButton [mat-dialog-close]="false">{{ mergeDialogData().cancelButtonText }}</button>
-  <button matButton [mat-dialog-close]="true" cdkFocusInitial>{{ mergeDialogData().confirmButtonText }}</button>
+  <button matButton [mat-dialog-close]="false">
+    {{ mergeDialogData().cancelButtonText }}
+  </button>
+  <button matButton [mat-dialog-close]="true" cdkFocusInitial>
+    {{ mergeDialogData().confirmButtonText }}
+  </button>
 </mat-dialog-actions>

@@ -40,7 +40,9 @@ export class ListComponent {
   private readonly router = inject(Router);
 
   protected searchTerm = signal<string>('');
-  private resourceRef = this.transactionService.getAllWithHttpResource(typeDelay(this.searchTerm));
+  private resourceRef = this.transactionService.getAllWithHttpResource(
+    typeDelay(this.searchTerm),
+  );
 
   protected isLoading = computed(() => this.resourceRef.isLoading());
   protected transactions = computed(() => this.resourceRef.value());
@@ -66,6 +68,8 @@ export class ListComponent {
   }
 
   private removeTransaction(transaction: Transaction) {
-    this.resourceRef.update((transactions) => transactions.filter((item) => item.id !== transaction.id));
+    this.resourceRef.update((transactions) =>
+      transactions.filter((item) => item.id !== transaction.id),
+    );
   }
 }

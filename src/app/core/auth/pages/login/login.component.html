@@ -1,12 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
   <mat-form-field class="w-100 mb-24">
     <mat-label>Usuário</mat-label>
-    <input
-      matInput
-      placeholder="Digite o usuário"
-      formControlName="user"
-      required
-    />
+    <input matInput placeholder="Digite o usuário" formControlName="user" required />
     @if (form.controls.user.hasError('required')) {
       <mat-error>Campo obrigatório</mat-error>
     }
@@ -26,7 +21,7 @@
     }
   </mat-form-field>
 
-  @if(form.hasError('wrongCredentials')) {
+  @if (form.hasError('wrongCredentials')) {
     <mat-error>Usuário ou senha incorretos</mat-error>
   }
 

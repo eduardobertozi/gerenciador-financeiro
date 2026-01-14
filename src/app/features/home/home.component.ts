@@ -11,7 +11,13 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 
 @Component({
   selector: 'app-home',
-  imports: [BalanceComponent, PieChartComponent, MatCardModule, MatButtonModule, MatProgressBarModule],
+  imports: [
+    BalanceComponent,
+    PieChartComponent,
+    MatCardModule,
+    MatButtonModule,
+    MatProgressBarModule,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

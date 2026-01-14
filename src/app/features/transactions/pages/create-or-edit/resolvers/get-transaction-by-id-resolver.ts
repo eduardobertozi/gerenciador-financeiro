@@ -3,9 +3,7 @@ import { TransactionsService } from '@/app/shared/transaction/services/transacti
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
 
-export const getTransactionByIdResolver: ResolveFn<Transaction | null> = (
-  route,
-) => {
+export const getTransactionByIdResolver: ResolveFn<Transaction | null> = (route) => {
   const transactionsService = inject(TransactionsService);
   const id = route.paramMap.get('id');
 

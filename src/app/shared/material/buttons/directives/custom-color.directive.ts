@@ -1,11 +1,4 @@
-import {
-  Directive,
-  effect,
-  ElementRef,
-  inject,
-  input,
-  Renderer2,
-} from '@angular/core';
+import { Directive, effect, ElementRef, inject, input, Renderer2 } from '@angular/core';
 
 type ColorType = 'error' | 'success' | 'warn' | 'danger';
 
@@ -24,10 +17,7 @@ export class CustomColorDirective {
   constructor() {
     effect(() => {
       if (this.color()) {
-        this.renderer2.addClass(
-          this.elementRef.nativeElement,
-          `button-${this.color()}`,
-        );
+        this.renderer2.addClass(this.elementRef.nativeElement, `button-${this.color()}`);
       }
     });
   }

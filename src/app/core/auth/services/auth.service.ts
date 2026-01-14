@@ -6,8 +6,7 @@ import { User } from '../interfaces/user';
 import { UserCredentials } from '../interfaces/user-credentials';
 
 function generateToken(): string {
-  const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
   let result = '';
   for (let i = 0; i < 20; i++) {

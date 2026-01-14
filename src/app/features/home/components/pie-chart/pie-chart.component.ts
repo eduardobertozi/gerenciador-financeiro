@@ -1,13 +1,19 @@
-import { Component, DestroyRef, effect, ElementRef, inject, input, viewChild } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  viewChild,
+} from '@angular/core';
 import Chart from 'chart.js/auto';
 import { PieChartConfig } from './pie-chart-config.interface';
 
 @Component({
   selector: 'app-pie-chart',
   imports: [],
-  template: `
-    <canvas #canvas></canvas>
-  `,
+  template: ` <canvas #canvas></canvas> `,
 })
 export class PieChartComponent {
   canvasEl = viewChild.required<ElementRef>('canvas');

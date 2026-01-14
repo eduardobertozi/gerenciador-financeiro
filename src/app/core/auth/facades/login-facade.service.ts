@@ -16,9 +16,7 @@ export class LoginFacadeService {
   private readonly loggedInUserStoreService = inject(LoggedInUserStoreService);
 
   login(userCredentials: UserCredentials) {
-    return this.authService
-      .login(userCredentials)
-      .pipe(this.createUserSession());
+    return this.authService.login(userCredentials).pipe(this.createUserSession());
   }
 
   refresh(token: string) {
@@ -27,12 +25,8 @@ export class LoginFacadeService {
 
   private createUserSession() {
     return pipe(
-      tap((res: AuthTokenResponse) =>
-        this.authTokenStorageService.set(res.token),
-      ),
-      switchMap((res: AuthTokenResponse) =>
-        this.authService.getCurrentUser(res.token),
-      ),
+      tap((res: AuthTokenResponse) => this.authTokenStorageService.set(res.token)),
+      switchMap((res: AuthTokenResponse) => this.authService.getCurrentUser(res.token)),
       tap((user: User) => this.loggedInUserStoreService.setUser(user)),
     );
   }

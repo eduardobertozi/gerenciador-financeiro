@@ -15,9 +15,7 @@ const CssClasses = {
   host: {
     '[class]': 'cssClass()',
   },
-  template: `
-    {{ transaction().value | currency }}
-  `,
+  template: ` {{ transaction().value | currency }} `,
 })
 export class TransactionValueComponent {
   transaction = input.required<Transaction>();

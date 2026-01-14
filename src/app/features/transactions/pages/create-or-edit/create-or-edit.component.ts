@@ -7,12 +7,7 @@ import {
 } from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
 import { Component, computed, inject, input } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -55,12 +50,9 @@ export class CreateOrEditComponent {
         title: new FormControl<string>(this.transaction()?.title ?? '', {
           validators: [Validators.required],
         }),
-        value: new FormControl<number | null>(
-          this.transaction()?.value ?? null,
-          {
-            validators: [Validators.required],
-          },
-        ),
+        value: new FormControl<number | null>(this.transaction()?.value ?? null, {
+          validators: [Validators.required],
+        }),
       }),
   );
 
@@ -84,15 +76,11 @@ export class CreateOrEditComponent {
     if (this.isEdit()) {
       return this.transactionService
         .put(this.transaction()!.id, payload)
-        .pipe(
-          tap(() => this.feedback.success('Transação atualizada com sucesso!')),
-        );
+        .pipe(tap(() => this.feedback.success('Transação atualizada com sucesso!')));
     } else {
       return this.transactionService
         .post(payload)
-        .pipe(
-          tap(() => this.feedback.success('Transação criada com sucesso!')),
-        );
+        .pipe(tap(() => this.feedback.success('Transação criada com sucesso!')));
     }
   }
 }

@@ -16,11 +16,7 @@ export class HumanizeCurrencyPipe implements PipeTransform {
   private readonly localeId = inject(LOCALE_ID);
 
   transform(value: number): string {
-    const formatedValue = formatCurrency(
-      value,
-      this.localeId,
-      this.getCurrencySymbol(),
-    );
+    const formatedValue = formatCurrency(value, this.localeId, this.getCurrencySymbol());
     const splittedValue = formatedValue.split('.');
 
     if (splittedValue.length === 1) {
