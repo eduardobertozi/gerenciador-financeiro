@@ -1,3 +1,5 @@
+import { TransactionType } from '@/app/shared/transaction/enums/transaction-type';
+import { sumTransactions } from '@/app/shared/transaction/functions/sum-transactions';
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { Component, computed, input } from '@angular/core';
 import { BalanceCardComponent } from './components/balance-card/balance-card.component';
@@ -12,15 +14,11 @@ export class BalanceComponent {
   transactions = input.required<Transaction[]>();
 
   totalIncomes = computed(() => {
-    return this.transactions()
-      .filter((item) => item.type === 'income')
-      .reduce((total, item) => total + item.value, 0);
+    return sumTransactions(this.transactions(), TransactionType.INCOME);
   });
 
   totalOutcomes = computed(() => {
-    return this.transactions()
-      .filter((item) => item.type === 'outcome')
-      .reduce((total, item) => total + item.value, 0);
+    return sumTransactions(this.transactions(), TransactionType.OUTCOME);
   });
 
   balance = computed(() => {
