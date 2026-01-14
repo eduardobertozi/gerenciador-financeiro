@@ -9,23 +9,25 @@
   </a>
 </div>
 
-Está carregando: {{ resourceRef.isLoading() }}
-
-<app-transactions-container
-  class="transactions"
-  [transactions]="resourceRef.value()"
->
-  <ng-template
-    #item
-    let-item="item"
+@if (this.isLoading()) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+} @else {
+  <app-transactions-container
+    class="transactions"
+    [transactions]="transactions()"
   >
-    <app-transaction-item
-      [transaction]="item"
-      (edit)="edit($event)"
-      (remove)="remove($event)"
-    />
-  </ng-template>
-  <ng-template #noItems>
-    <app-no-transactions />
-  </ng-template>
-</app-transactions-container>
+    <ng-template
+      #item
+      let-item="item"
+    >
+      <app-transaction-item
+        [transaction]="item"
+        (edit)="edit($event)"
+        (remove)="remove($event)"
+      />
+    </ng-template>
+    <ng-template #noItems>
+      <app-no-transactions />
+    </ng-template>
+  </app-transactions-container>
+}
