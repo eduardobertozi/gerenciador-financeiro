@@ -12,7 +12,7 @@
     "lint": "ng lint",
     "pretty-quick": "pretty-quick --staged",
     "lint:fix": "ng lint --fix",
-    "format": "prettier --write .",
+    "format": "prettier --write ./src",
     "format:staged": "pretty-quick --staged",
     "prepare": "husky install"
   },

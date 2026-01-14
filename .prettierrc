@@ -1,22 +1,14 @@
 {
-  "printWidth": 120,
+  "printWidth": 90,
   "tabWidth": 2,
-  "useTabs": false,
   "singleQuote": true,
   "semi": true,
-  "trailingComma": "all",
-  "bracketSpacing": true,
-  "arrowParens": "always",
-  "endOfLine": "auto",
-  "htmlWhitespaceSensitivity": "ignore",
-  "embeddedLanguageFormatting": "auto",
   "overrides": [
     {
       "files": "*.html",
       "options": {
         "parser": "angular",
-        "printWidth": 120,
-        "singleAttributePerLine": true
+        "printWidth": 90
       }
     }
   ]

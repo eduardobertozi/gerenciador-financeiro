@@ -1,6 +1,15 @@
+.prettierrc
+angular.json
+README.md
+proxy.config.json
 package.json
 package-lock.json
+db.json
+
 dist
 node_modules
-.angular
-.vscode
+draw
+public
+
+
+.*
