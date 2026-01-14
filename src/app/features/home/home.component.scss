@@ -1,0 +1,13 @@
+.placeholder-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.placeholder-card-btn {
+  width: 196px;
+  margin: 0 auto;
+}
