@@ -2,7 +2,14 @@ import { ConfirmationDialogService } from '@/app/shared/dialog/confirmation/serv
 import { FeedbackService } from '@/app/shared/feedback/services/feedback.service';
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { TransactionsService } from '@/app/shared/transaction/services/transactions.service';
-import { Component, computed, inject, Signal, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  Signal,
+  signal,
+} from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -31,6 +38,7 @@ function typeDelay(signal: Signal<string>) {
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent {
   private readonly transactionService = inject(TransactionsService);

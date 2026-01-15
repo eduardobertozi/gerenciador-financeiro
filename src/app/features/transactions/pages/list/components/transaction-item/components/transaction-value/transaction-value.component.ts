@@ -1,7 +1,7 @@
 import { TransactionType } from '@/app/shared/transaction/enums/transaction-type';
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
 import { CurrencyPipe } from '@angular/common';
-import { Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 const CssClasses = {
   [TransactionType.INCOME]: 'income',
@@ -16,6 +16,7 @@ const CssClasses = {
     '[class]': 'cssClass()',
   },
   template: ` {{ transaction().value | currency }} `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionValueComponent {
   transaction = input.required<Transaction>();

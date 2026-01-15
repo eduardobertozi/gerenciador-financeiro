@@ -1,6 +1,6 @@
 import { CustomColorDirective } from '@/app/shared/material/buttons/directives/custom-color.directive';
 import { Transaction } from '@/app/shared/transaction/interfaces/transaction';
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
@@ -19,6 +19,7 @@ import { IsIncomeDirective } from './directives/is-income.directive';
   ],
   templateUrl: './transaction-item.component.html',
   styleUrl: './transaction-item.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionItemComponent {
   transaction = input.required<Transaction>();

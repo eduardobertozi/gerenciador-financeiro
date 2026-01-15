@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MobileLayoutService } from '../../../services/mobile-layout.service';
@@ -9,6 +9,7 @@ import { SidenavVisibilityStore } from '../../../stores/sidenav-visibility.store
   imports: [MatButtonModule, MatIconModule],
   templateUrl: './toggle-sidenav-visibility.component.html',
   styleUrl: './toggle-sidenav-visibility.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToggleSidenavVisibilityComponent {
   private readonly mobileLayoutService = inject(MobileLayoutService);

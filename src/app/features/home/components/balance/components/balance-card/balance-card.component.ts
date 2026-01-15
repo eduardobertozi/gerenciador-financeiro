@@ -1,4 +1,10 @@
-import { Component, computed, input, Signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  Signal,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { HumanizeCurrencyPipe } from './pipes/humanize-currency-pipe';
 
@@ -10,6 +16,7 @@ type ValueCssClasses = 'income' | 'outcome' | 'zero';
   imports: [MatCardModule, HumanizeCurrencyPipe],
   templateUrl: './balance-card.component.html',
   styleUrl: './balance-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BalanceCardComponent {
   type = input.required<CardType>();
